@@ -25,13 +25,14 @@ def wine_detail(request, wine_id):
     form = ReviewForm()
     return render(request, 'reviews/wine_detail.html', {'wine':wine, 'form': form})
 
+@login_required
 def add_review(request, wine_id):
     wine = get_object_or_404(Wine, pk = wine_id)
     form = ReviewForm(request.POST)
     if form.is_valid():
         rating = form.cleaned_data['rating']
         comment = form.cleaned_data['comment']
-        user_name = form.cleaned_data['user_name']
+        user_name = request.user.user_name
         review = Review()
         review.wine = wine
         review.user_name = user_name
