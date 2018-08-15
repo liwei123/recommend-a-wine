@@ -19,5 +19,15 @@ from django.urls import include, path
 urlpatterns = [
     path('reviews/', include(('reviews.urls', 'reviews'), namespace="reviews")),
     path('admin/', admin.site.urls),
-    path('accounts/', include('django.contrib.auth.urls'))
+    path('accounts/', include('registration.backends.simple.urls')),
+    path('accounts/', include(('django.contrib.auth.urls','auth'),namespace="auth"))
 ]
+
+# from django.conf.urls import include, url
+# from django.contrib import admin
+
+# urlpatterns = [
+#     url(r'^reviews/', include(('reviews.urls','reviews'), namespace="reviews")),
+#     url(r'^admin/', include(admin.site.urls)),
+#     url('^accounts/', include(('django.contrib.auth.urls','auth'), namespace="auth")),
+# ]

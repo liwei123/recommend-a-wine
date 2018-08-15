@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap3',
     'reviews',
+    'registration',
 ]
 
 MIDDLEWARE = [
@@ -122,3 +123,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+
+# for login
+
+LOGIN_REDIRECT_URL = '/reviews/review/user'
+
+# for registration
+
+ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window
+REGISTRATION_AUTO_LOGIN = True # Automatically log the user in.
