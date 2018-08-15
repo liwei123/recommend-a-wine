@@ -41,7 +41,7 @@ def add_review(request, wine_id):
     if form.is_valid():
         rating = form.cleaned_data['rating']
         comment = form.cleaned_data['comment']
-        user_name = request.user.user_name
+        user_name = request.user.username
         review = Review()
         review.wine = wine
         review.user_name = user_name
@@ -54,3 +54,13 @@ def add_review(request, wine_id):
         # user hits the Back button.
         return HttpResponseRedirect(reverse('reviews:wine_detail', args=[wine.id]))
     return render(request, 'reviews/wine_detail.html', {'wine':wine, 'form': form})
+
+@login_required
+def user_recommendation_list(request):
+    # get this user reviews
+    user_reviews = Review.objects.filter(user_name=request.user.username).prefetch_related('wine')
+    # from the reviews, get set of wines
+    user_reviews_wine_ids = set(map(lambda x: x.wine.id, user_reviews))
+    # then get wine list excluding the previous ids
+    wine_list = Wine.objects.exclude(id__in=user_reviews_wine_ids)
+    return render(request, 'reviews/user_recommendation_list.html', {'username': request.user.username, 'wine_list': wine_list})
