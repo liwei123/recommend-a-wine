@@ -6,6 +6,8 @@ django
 django-bootstrap3
 numpy
 django-registration-redux
+gunicorn
+django-heroku
 #
 ###### Requirements with Version Specifiers ######
 #   See https://www.python.org/dev/peps/pep-0440/#version-specifiers
