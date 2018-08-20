@@ -8,6 +8,7 @@ numpy
 django-registration-redux
 scikit-learn
 scipy
+pandas
 gunicorn
 django-heroku
 #
